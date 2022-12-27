@@ -17,7 +17,12 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
         data = request.data
         board_data = data['data'].split("/")
         board_data.pop(0)
-        serializer = self.get_serializer(data=create_data_format(board_data))
+        obj = Board.objects.all().first()
+        if obj:
+            serializer = self.get_serializer(obj, data=create_data_format(board_data))
+        else:
+            serializer = self.get_serializer(data=create_data_format(board_data))
+
         if not serializer.is_valid():
             return Response({
                 "error": serializer.errors
@@ -28,8 +33,8 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
             "data": serializer.data
         }, status=200)
 
-    def retrieve(self, request, *args, **kwargs):
-        obj = self.get_object()
+    def list(self, request):
+        obj = Board.objects.all().first()
         print(obj)
         return Response({
             "data": obj.send_data_type

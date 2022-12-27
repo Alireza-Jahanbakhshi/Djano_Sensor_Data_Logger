@@ -7,3 +7,4 @@ class BoardSerializers(serializers.ModelSerializer):
     class Meta:
         model = Board
         exclude = ["id"]
+
