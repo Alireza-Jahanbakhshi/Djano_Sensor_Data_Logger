@@ -5,14 +5,13 @@ class Board(models.Model):
     color_R = models.IntegerField(verbose_name='R of RGB')
     color_G = models.IntegerField(verbose_name='G of RGB')
     color_B = models.IntegerField(verbose_name='B of RGB')
-    date = models.CharField(max_length=10, verbose_name='date')
-    time = models.CharField(max_length=8, verbose_name='time')
+    date_time = models.CharField(max_length=15, verbose_name='date_time')
     temp = models.IntegerField(verbose_name='temp')
     humidity = models.IntegerField(verbose_name='humidity')
-    LED_1 = models.BooleanField(verbose_name='LED1')
-    LED_2 = models.BooleanField(verbose_name='LED2')
-    LED_3 = models.BooleanField(verbose_name='LED3')
-    speacker = models.CharField(max_length=3, verbose_name='speacker')
+    LED_1 = models.IntegerField(verbose_name='LED1')
+    LED_2 = models.IntegerField(verbose_name='LED2')
+    LED_3 = models.IntegerField(verbose_name='LED3')
+    speacker = models.IntegerField(verbose_name='speacker')
 
 
     class Meta:

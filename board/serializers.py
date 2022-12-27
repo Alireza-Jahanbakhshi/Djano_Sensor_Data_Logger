@@ -9,12 +9,10 @@ class BoardSerializers(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = [
-            'id',
             'color_R',
             'color_G',
             'color_B',
-            'date',
-            'time',
+            'date_time',
             'temp',
             'humidity',
             'LED_1',
