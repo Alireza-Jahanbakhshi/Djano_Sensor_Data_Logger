@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href='{% static "assets/public/vite.svg" %}'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href='{% static "assets/css/style.css" %}'/>
+    <title>Sensor</title>
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <div class="lamps--container">
+            <label class="lamp dynamic-lamp">
+                <input type="color" id="color-picker"/>
+            </label>
+            <div id="blue" class="lamp blue-lamp"></div>
+            <div id="red" class="lamp red-lamp"></div>
+            <div id="green" class="lamp green-lamp"></div>
+        </div>
+        <div class="temp--container">
+            <div class="termometer">
+                <div class="temperature" style="height: 0" data-value="0°C"></div>
+                <div class="graduations"></div>
+            </div>
+        </div>
+        <div class="humidity--container">
+            <h5 class="humidity__title">Humidity</h5>
+            <div class="circle-wrap">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle">75%</div>
+                </div>
+            </div>
+        </div>
+        <div class="speaker--container">
+            <img src='{% static "assets/public/speaker.png" %}' class="speaker__img"/>
+            <audio src='{% static "assets/public/beep.wav" %}' id="beep"></audio>
+        </div>
+    </div>
+</div>
+<script type="module" src='{% static "assets/js/main.js" %}'></script>
+</body>
+</html>

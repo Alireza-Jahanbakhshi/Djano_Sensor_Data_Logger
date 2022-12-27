@@ -1,14 +1,15 @@
-
-from rest_framework.permissions import IsAuthenticated,AllowAny
+from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from rest_framework import viewsets,status
+from rest_framework import viewsets, status
 
 from board.models import Board
 from board.serializers import BoardSerializers
-
+from board.utils import create_data_format
 
 
 class BoardAPIViewSet(viewsets.ModelViewSet):
+    queryset = Board.objects.all()
     serializer_class = BoardSerializers
     permission_classes = (AllowAny,)
 
@@ -16,23 +17,24 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
         data = request.data
         board_data = data['data'].split("/")
         board_data.pop(0)
-        dict_board = {}
-        dict_board["color_R"]=board_data[0]
-        dict_board["color_G"]=board_data[1]
-        dict_board["color_B"]=board_data[2]
-        dict_board["date_time"]=board_data[3]
-        dict_board["temp"]=board_data[4]
-        dict_board["humidity"]=board_data[5]
-        dict_board["LED_1"]=board_data[6]
-        dict_board["LED_2"]=board_data[7]
-        dict_board["LED_3"]=board_data[8]
-        dict_board["speacker"]=board_data[9]
-        serializer = self.get_serializer(data=dict_board)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response("error")
+        serializer = self.get_serializer(data=create_data_format(board_data))
+        if not serializer.is_valid():
+            return Response({
+                "error": serializer.errors
+            }, status=400)
+
+        serializer.save()
+        return Response({
+            "data": serializer.data
+        }, status=200)
+
+    def retrieve(self, request, *args, **kwargs):
+        obj = self.get_object()
+        print(obj)
+        return Response({
+            "data": obj.send_data_type
+        }, status=200)
 
 
-        
+def board_view(request):
+    return render(request, 'index.html')

@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('LED_1', models.IntegerField(verbose_name='LED1')),
                 ('LED_2', models.IntegerField(verbose_name='LED2')),
                 ('LED_3', models.IntegerField(verbose_name='LED3')),
-                ('speacker', models.IntegerField(verbose_name='speacker')),
+                ('speaker', models.IntegerField(verbose_name='speaker')),
             ],
             options={
                 'verbose_name': 'Board',

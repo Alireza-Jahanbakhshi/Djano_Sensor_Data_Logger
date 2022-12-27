@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from account.views import UserLogicViewSet
-from board.views import BoardAPIViewSet
+from board.views import BoardAPIViewSet, board_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.SimpleRouter()
 router.register(r'user', UserLogicViewSet, basename='user')
@@ -25,5 +27,9 @@ router.register(r'board', BoardAPIViewSet, basename='board')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('', board_view, name="board_view")
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
