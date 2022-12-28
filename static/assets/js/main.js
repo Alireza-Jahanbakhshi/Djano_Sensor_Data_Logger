@@ -27,6 +27,37 @@ dynamicLampInput.addEventListener("input", (e) => {
 
 blueLamp.addEventListener("click", (e) => {
   e.target.classList.toggle("blue-lamp");
+  if (blueLamp)
+  <script>
+    $(document).ready(function(){
+      $.ajax({
+        url: "http://127.0.0.1:8000/api/board/LED_1=1",
+        type: "PUT",
+        success: function(result){
+          console.log(result);
+        },
+        error:function(error){
+          console.log(error);
+        }
+      })
+    })
+  </script>
+  else 
+  <script>
+  $(document).ready(function(){
+    $.ajax({
+      url: "http://127.0.0.1:8000/api/board/LED_1=0",
+      type: "PUT",
+      success: function(result){
+        console.log(result);
+      },
+      error:function(error){
+        console.log(error);
+      }
+    })
+  })
+</script>
+
 });
 
 redLamp.addEventListener("click", (e) => {

@@ -12,16 +12,34 @@
 <div id="app">
     <div class="container">
         <div class="lamps--container">
-            <label class="lamp dynamic-lamp" style="background: #e66465 ; border: dotted 2px #e66465 ">
+        {% if rgb %}
+            <label class="lamp dynamic-lamp" style="background: #{{rgb}} ; border: #{{rgb}} ">
                 <input type="color" id="color-picker"/>
             </label>
+        {% else %}
+            <label class="lamp dynamic-lamp" >
+                <input type="color" id="color-picker"/>
+            </label>
+        {% endif %}
+        {% if obj.LED_1 == 0 %}
+            <div id="blue" class="lamp"></div>
+        {%else%}
             <div id="blue" class="lamp blue-lamp"></div>
+        {%endif%}
+        {% if obj.LED_2 == 0 %}
+            <div id="red" class="lamp"></div>
+        {%else%}
             <div id="red" class="lamp red-lamp"></div>
+        {%endif%}
+        {% if obj.LED_3 == 0 %}
+            <div id="green" class="lamp"></div>
+        {%else%}
             <div id="green" class="lamp green-lamp"></div>
+        {%endif%}
         </div>
         <div class="temp--container">
             <div class="termometer">
-                <div class="temperature" style="height: 0" data-value="0°C"></div>
+                <div class="temperature" style="height: 0" data-value="{{obj.temp}}°C"></div>
                 <div class="graduations"></div>
             </div>
         </div>
@@ -35,7 +53,7 @@
                     <div class="mask half">
                         <div class="fill"></div>
                     </div>
-                    <div class="inside-circle">75%</div>
+                    <div class="inside-circle">{{obj.humidity}}%</div>
                 </div>
             </div>
         </div>
