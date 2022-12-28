@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework import viewsets, status
 
 from board.models import Board
@@ -33,22 +34,30 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
             "data": serializer.data
         }, status=200)
 
-    def update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.queryparams)
-        if not serializer.is_valid():
-            return Response({
-                "error": serializer.errors
-            }, status=400)
+    @action(detail=False,methods=["get"],permission_classes=[AllowAny])
+    def update_board(self, request, *args, **kwargs):
+        print("im in")
+        instance = Board.objects.all().first()
+        params = request.query_params
+        led_1 = params.get("led_1","")
+        led_2 = params.get("led_2","")
+        led_3 = params.get("led_3","")
+        led = params.get("led","")
+        if led_1:
+            print(led_1,"sssss")
+            if instance.LED_1 :
+                instance.LED_1 = 0
+            else :
+                instance.LED_1 = 1
 
-        serializer.save()
+        instance.save() 
         return Response({
-            "data": serializer.data
-        }, status=200)
+            "data" : "success"
+        },status=200)
+
 
     def list(self, request):
         obj = Board.objects.all().first()
-        print(obj)
         return Response({
             "data": obj.send_data_type
         }, status=200)

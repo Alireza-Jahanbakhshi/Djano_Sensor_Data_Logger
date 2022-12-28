@@ -27,3 +27,5 @@ def create_data_format(board_data):
     dict_board["LED_3"] = board_data[8]
     dict_board["speaker"] = board_data[9]
     return dict_board
+
+
