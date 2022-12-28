@@ -23,11 +23,21 @@ dynamicLampInput.addEventListener("input", (e) => {
   dynamicLamp.style.backgroundImage = `radial-gradient(${e.target.value}, transparent)`;
   dynamicLamp.style.border = `dotted 2px ${e.target.value}`;
   dynamicLamp.style.boxShadow = `0 0 20px #111 inset, 0 0 10px ${e.target.value}`;
+  $.ajax({
+    url: "http://127.0.0.1:8000/api/board/update_board/?led=${e.target.value}",
+    type: "GET",
+    contentType: 'application/json',
+    success: function(result){
+      console.log(result);
+    },
+    error:function(error){
+      console.log(error);
+    }
+  })
 });
 
 blueLamp.addEventListener("click", (e) => {
   e.target.classList.toggle("blue-lamp");
-  console.log("im in")
   $.ajax({
     url: "http://127.0.0.1:8000/api/board/update_board/?led_1=c",
     type: "GET",
@@ -39,17 +49,36 @@ blueLamp.addEventListener("click", (e) => {
       console.log(error);
     }
   })
-  console.log("im in2")
-
-
 });
 
 redLamp.addEventListener("click", (e) => {
   e.target.classList.toggle("red-lamp");
+  $.ajax({
+    url: "http://127.0.0.1:8000/api/board/update_board/?led_2=c",
+    type: "GET",
+    contentType: 'application/json',
+    success: function(result){
+      console.log(result);
+    },
+    error:function(error){
+      console.log(error);
+    }
+  })
 });
 
 greenLamp.addEventListener("click", (e) => {
   e.target.classList.toggle("green-lamp");
+  $.ajax({
+    url: "http://127.0.0.1:8000/api/board/update_board/?led_3=c",
+    type: "GET",
+    contentType: 'application/json',
+    success: function(result){
+      console.log(result);
+    },
+    error:function(error){
+      console.log(error);
+    }
+  })
 });
 
 speakerImg.addEventListener("click", (e) => {

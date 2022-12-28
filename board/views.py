@@ -6,7 +6,7 @@ from rest_framework import viewsets, status
 
 from board.models import Board
 from board.serializers import BoardSerializers
-from board.utils import create_data_format, rgb_to_hex
+from board.utils import create_data_format, rgb_to_hex, hex_to_rgb
 
 
 class BoardAPIViewSet(viewsets.ModelViewSet):
@@ -36,7 +36,6 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
 
     @action(detail=False,methods=["get"],permission_classes=[AllowAny])
     def update_board(self, request, *args, **kwargs):
-        print("im in")
         instance = Board.objects.all().first()
         params = request.query_params
         led_1 = params.get("led_1","")
@@ -44,16 +43,34 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
         led_3 = params.get("led_3","")
         led = params.get("led","")
         if led_1:
-            print(led_1,"sssss")
             if instance.LED_1 :
                 instance.LED_1 = 0
             else :
                 instance.LED_1 = 1
 
-        instance.save() 
+        if led_2:
+            if instance.LED_1 :
+                instance.LED_1 = 0
+            else :
+                instance.LED_1 = 1
+        
+        if led_3:
+            if instance.LED_1 :
+                instance.LED_1 = 0
+            else :
+                instance.LED_1 = 1
+        
+        if led:
+            led = hex_to_rgb(led)
+            instance.color_R = led[0]
+            instance.color_G = led[1]
+            instance.color_B = led[2]
+        
+        instance.save()
         return Response({
             "data" : "success"
         },status=200)
+
 
 
     def list(self, request):
