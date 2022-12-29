@@ -29,7 +29,9 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
                 "error": serializer.errors
             }, status=400)
 
-        serializer.save()
+        new_obj = serializer.save()
+        new_obj.hex_color = None
+        new_obj.save()
         return Response({
             "data": serializer.data
         }, status=200)
@@ -42,6 +44,7 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
         led_2 = params.get("led_2","")
         led_3 = params.get("led_3","")
         led = params.get("led","")
+        print(led,'sss')
         if led_1:
             if instance.LED_1 :
                 instance.LED_1 = 0
@@ -49,23 +52,24 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
                 instance.LED_1 = 1
 
         if led_2:
-            if instance.LED_1 :
-                instance.LED_1 = 0
+            if instance.LED_2 :
+                instance.LED_2 = 0
             else :
-                instance.LED_1 = 1
+                instance.LED_2 = 1
         
         if led_3:
-            if instance.LED_1 :
-                instance.LED_1 = 0
+            if instance.LED_3 :
+                instance.LED_3 = 0
             else :
-                instance.LED_1 = 1
+                instance.LED_3 = 1
         
         if led:
+            print(led)
+            instance.hex_color = led
             led = hex_to_rgb(led)
             instance.color_R = led[0]
             instance.color_G = led[1]
             instance.color_B = led[2]
-        
         instance.save()
         return Response({
             "data" : "success"
@@ -83,11 +87,15 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
 
 def board_view(request):
     obj = Board.objects.all().first()
-    rgb = rgb_to_hex(
-        obj.color_R,
-        obj.color_G,
-        obj.color_R
-        )
+    if not obj.hex_color : 
+        rgb = rgb_to_hex(
+            obj.color_R,
+            obj.color_G,
+            obj.color_R
+            )
+    else :
+        rgb = obj.hex_color
+    print(rgb)
     context = {"obj": obj, "rgb": rgb}
     return render(request, 'index.html', context)
 

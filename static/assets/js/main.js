@@ -23,8 +23,9 @@ dynamicLampInput.addEventListener("input", (e) => {
   dynamicLamp.style.backgroundImage = `radial-gradient(${e.target.value}, transparent)`;
   dynamicLamp.style.border = `dotted 2px ${e.target.value}`;
   dynamicLamp.style.boxShadow = `0 0 20px #111 inset, 0 0 10px ${e.target.value}`;
+  let color = e.target.value.substring(1);
   $.ajax({
-    url: "http://127.0.0.1:8000/api/board/update_board/?led=${e.target.value}",
+    url: `http://127.0.0.1:8000/api/board/update_board/?led=${color}`,
     type: "GET",
     contentType: 'application/json',
     success: function(result){
@@ -82,8 +83,12 @@ greenLamp.addEventListener("click", (e) => {
 });
 
 speakerImg.addEventListener("click", (e) => {
+  console.log(`volume: ${speakerImg.dataset.value / 10}`)
+  audio.volume = speakerImg.dataset.value / 10;
   audio.play();
 });
+
+console.log(temperature.dataset.value)
 
 function setTemperature(amounth) {
   temperature.style.height =
@@ -91,4 +96,4 @@ function setTemperature(amounth) {
   temperature.dataset.value = amounth + units[config.unit];
 }
 
-setTemperature(30);
+setTemperature(parseInt(temperature.dataset.value));

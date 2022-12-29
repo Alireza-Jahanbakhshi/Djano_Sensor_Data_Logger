@@ -33,6 +33,12 @@ class Board(models.Model):
     speaker = models.IntegerField(
         verbose_name='speaker'
     )
+    hex_color = models.CharField(
+        max_length=128,
+        verbose_name='hex',
+        null=True,
+        blank=True
+    )
 
     @property
     def send_data_type(self):
@@ -40,7 +46,7 @@ class Board(models.Model):
         return wanted data types
         """
         data = [0, self.color_R, self.color_G, self.color_B, self.date_time.timestamp() * 1000, self.temp,
-                self.humidity, self.LED_1, self.LED_2, self.LED_3]
+                self.humidity, self.LED_1, self.LED_2, self.LED_3,self.speaker]
 
         data = map(lambda x: str(x), data)
 

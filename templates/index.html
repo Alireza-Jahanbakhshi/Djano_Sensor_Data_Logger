@@ -58,8 +58,8 @@
             </div>
         </div>
         <div class="speaker--container">
-            <img src='{% static "assets/public/speaker.png" %}' class="speaker__img"/>
-            <audio src='{% static "assets/public/beep.wav" %}' id="beep"></audio>
+            <img src='{% static "assets/public/speaker.png" %}' class="speaker__img" data-value="{{obj.speaker}}"/>
+            <audio src='{% static "assets/public/beep.wav" %}' id="beep" ></audio>
         </div>
     </div>
 </div>
