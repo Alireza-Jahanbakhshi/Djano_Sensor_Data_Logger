@@ -1,6 +1,6 @@
 """socket_api URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
+The urlpatterns list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
 Examples:
 Function views
@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from account.views import UserLogicViewSet
+from account.views import UserLogicViewSet , user_login
 from board.views import BoardAPIViewSet, board_view
 from django.conf import settings
 from django.conf.urls.static import static
@@ -28,7 +28,8 @@ router.register(r'board', BoardAPIViewSet, basename='board')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('', board_view, name="board_view")
+    path('', board_view, name="board_view"),
+    path('login/',user_login , name="login")
 ]
 
 if settings.DEBUG:

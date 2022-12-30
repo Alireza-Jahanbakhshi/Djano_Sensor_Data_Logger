@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,login as _login
 from django.utils.translation import gettext_lazy as _
 from rest_framework.authtoken.models import Token
 from rest_framework.viewsets import GenericViewSet
@@ -6,11 +6,12 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny , IsAuthenticated
 from rest_framework.response import Response
 from .serializer import LoginUserSerializer , ChangePasswordSerializer
+from django.shortcuts import render
 
 
 class UserLogicViewSet(GenericViewSet):
 
-    @action(detail=False, methods=["post"], permission_classes=[AllowAny])
+    @action(detail=False, methods=["post"], permission_classes=[AllowAny],serializer_class=LoginUserSerializer)
     def login(self, request):
         serializer = LoginUserSerializer(data=request.data)
         if not serializer.is_valid():
@@ -24,9 +25,9 @@ class UserLogicViewSet(GenericViewSet):
             return Response({
                 "err": "Username or Password wrong"
             }, status=400)
-        token = Token.objects.get_or_create(user=user)[0]
+        _login(request,user)
         return Response({
-            "token": token.key,
+            "resp":"success" ,
         }, status=200)
 
 
@@ -46,3 +47,9 @@ class UserLogicViewSet(GenericViewSet):
         return Response({
             "data" : "password changed"
         },status=400)
+
+
+
+def user_login(request):
+
+    return render(request, 'login.html')
