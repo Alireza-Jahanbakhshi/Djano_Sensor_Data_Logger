@@ -28,8 +28,8 @@ router.register(r'board', BoardAPIViewSet, basename='board')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('', board_view, name="board_view"),
-    path('login/',user_login , name="login")
+    path('board_view/', board_view, name="board_view"),
+    path('',user_login , name="login")
 ]
 
 if settings.DEBUG:

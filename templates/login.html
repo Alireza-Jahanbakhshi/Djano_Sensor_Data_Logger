@@ -44,23 +44,21 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
 
       <!-- Submit button -->
       <button type="submit" class="btn btn-primary btn-block mb-4" value="loginPassword" >Sign in</button>
-    <script>
-        $.ajax({
-            url: "http://127.0.0.1:8000/api/user",
-            type: "POST",
-            contentType: 'application/json',
-            data:{
-                "username": username,
-                "password": password
-            },
-            success: function(result){
-                $("button").load("index.html");
-            },
-            error:function(error){
-            console.log(error);
-            }
-        })
-    </script>
+
+      <script src="https:/ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script>
+      var username = $("input#username").val();
+      var password = $("input#password").val();
+      $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:8000/api/user/login/",
+        dataType: 'json',
+        data: {"username": username , "password" : password },
+        success: function (){
+          location.href = "http://127.0.0.1:8000/board_view"
+        }
+      });
+      </script>
     
 </body>
 

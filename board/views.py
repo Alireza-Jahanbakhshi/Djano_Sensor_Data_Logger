@@ -84,7 +84,7 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
         }, status=200)
     
 
-
+@action(detail=False,methods=["post"],permission_classes=[IsAuthenticated])
 def board_view(request):
     obj = Board.objects.all().first()
     if not obj.hex_color : 
@@ -95,7 +95,5 @@ def board_view(request):
             )
     else :
         rgb = obj.hex_color
-    print(rgb)
     context = {"obj": obj, "rgb": rgb}
     return render(request, 'index.html', context)
-
