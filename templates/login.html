@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,32 +34,24 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
       <!-- Username input -->
       <div class="form-outline mb-4">
         <label class="form-label" for="loginName">username</label>
-        <input name="username" class="form-control" />
+        <input name="username" id="username" class="form-control" />
       </div>
 
       <!-- Password input -->
       <div class="form-outline mb-4">
         <label class="form-label" for="loginPassword">Password</label>
-        <input type="password" name="password" class="form-control" />
+        <input type="password" id="password" name="password" class="form-control" />
       </div>
 
       <!-- Submit button -->
-      <button type="submit" class="btn btn-primary btn-block mb-4" value="loginPassword" >Sign in</button>
+      <button type="submit" class="btn btn-primary btn-block mb-4" id="submit-login" value="loginPassword" >Sign in</button>
+      <h3 style="display: none;" id="wrong-info">information wrong</h3>
+  </div>
+  </div>
 
       <script src="https:/ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script>
-      var username = $("input#username").val();
-      var password = $("input#password").val();
-      $.ajax({
-        type: "POST",
-        url: "http://127.0.0.1:8000/api/user/login/",
-        dataType: 'json',
-        data: {"username": username , "password" : password },
-        success: function (){
-          location.href = "http://127.0.0.1:8000/board_view"
-        }
-      });
-      </script>
+      <script type="module" src='{% static "assets/js/login.js" %}'></script>
+
     
 </body>
 

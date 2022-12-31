@@ -14,7 +14,7 @@ class UserLogicViewSet(GenericViewSet):
     @action(detail=False, methods=["post"], permission_classes=[AllowAny],serializer_class=LoginUserSerializer)
     def login(self, request):
         serializer = LoginUserSerializer(data=request.data)
-        breakpoint()
+        
         if not serializer.is_valid():
             return Response({
                 "err": "parameters did not sent"

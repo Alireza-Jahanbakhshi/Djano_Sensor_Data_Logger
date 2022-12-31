@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -84,7 +85,7 @@ class BoardAPIViewSet(viewsets.ModelViewSet):
         }, status=200)
     
 
-@action(detail=False,methods=["post"],permission_classes=[IsAuthenticated])
+@login_required(login_url='login/')
 def board_view(request):
     obj = Board.objects.all().first()
     if not obj.hex_color : 
