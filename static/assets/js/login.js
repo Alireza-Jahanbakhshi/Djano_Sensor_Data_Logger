@@ -9,11 +9,11 @@ login.addEventListener("click",(e)=>{
   
     $.ajax({
       type: "POST",
-      url: "http://127.0.0.1:8000/api/user/login/",
+      url: "http://194.5.176.138:8000/api/user/login/",
       dataType: 'json',
       data: {"username": username.value , "password" : password.value },
       success: function (){
-        location.href = "http://127.0.0.1:8000/"
+        location.href = "http://194.5.176.138:8000/"
       },
       error:function(){
         wrong.style.display='flex';
