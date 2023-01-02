@@ -20,7 +20,7 @@ Frontend:Sara Kabiri,Sina Abdullahi
 
 **Home page : http://194.5.176.138:8000/**
 
-**Login : **
+**Login :**
 >username : admin
 >password : 1234
 
