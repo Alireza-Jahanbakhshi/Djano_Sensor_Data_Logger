@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate,login as _login
+from django.contrib.auth import authenticate,login as _login , logout as _logout
 from django.utils.translation import gettext_lazy as _
 from rest_framework.authtoken.models import Token
 from rest_framework.viewsets import GenericViewSet
@@ -13,6 +13,8 @@ class UserLogicViewSet(GenericViewSet):
 
     @action(detail=False, methods=["post"], permission_classes=[AllowAny],serializer_class=LoginUserSerializer)
     def login(self, request):
+        if request.user :
+            _logout(request)
         serializer = LoginUserSerializer(data=request.data)
         
         if not serializer.is_valid():
