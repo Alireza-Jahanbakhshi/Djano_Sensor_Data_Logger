@@ -18,7 +18,9 @@ Frontend:Sara Kabiri,Sina Abdullahi
 **Run project:**
 > python manage.py runserver
 
-**Login : http://194.5.176.138:8000/**
+**Home page : http://194.5.176.138:8000/**
+
+**Login : **
 >username : admin
 >password : 1234
 
