@@ -25,7 +25,7 @@ dynamicLampInput.addEventListener("input", (e) => {
   dynamicLamp.style.boxShadow = `0 0 20px #111 inset, 0 0 10px ${e.target.value}`;
   let color = e.target.value.substring(1);
   $.ajax({
-    url: `http://194.5.176.138:8000/api/board/update_board/?led=${color}`,
+    url: `http://sensordatalogger.ir/api/board/update_board/?led=${color}`,
     type: "GET",
     contentType: 'application/json',
     success: function(result){
@@ -40,7 +40,7 @@ dynamicLampInput.addEventListener("input", (e) => {
 blueLamp.addEventListener("click", (e) => {
   e.target.classList.toggle("blue-lamp");
   $.ajax({
-    url: "http://194.5.176.138:8000/api/board/update_board/?led_1=c",
+    url: "http://sensordatalogger.ir/api/board/update_board/?led_1=c",
     type: "GET",
     contentType: 'application/json',
     success: function(result){
@@ -55,7 +55,7 @@ blueLamp.addEventListener("click", (e) => {
 redLamp.addEventListener("click", (e) => {
   e.target.classList.toggle("red-lamp");
   $.ajax({
-    url: "http://194.5.176.138:8000/api/board/update_board/?led_2=c",
+    url: "http://sensordatalogger.ir/api/board/update_board/?led_2=c",
     type: "GET",
     contentType: 'application/json',
     success: function(result){
@@ -70,7 +70,7 @@ redLamp.addEventListener("click", (e) => {
 greenLamp.addEventListener("click", (e) => {
   e.target.classList.toggle("green-lamp");
   $.ajax({
-    url: "http://194.5.176.138:8000/api/board/update_board/?led_3=c",
+    url: "http://sensordatalogger.ir/api/board/update_board/?led_3=c",
     type: "GET",
     contentType: 'application/json',
     success: function(result){

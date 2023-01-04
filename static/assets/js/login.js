@@ -9,11 +9,11 @@ login.addEventListener("click",(e)=>{
   
     $.ajax({
       type: "POST",
-      url: "http://194.5.176.138:8000/api/user/login/",
+      url: "http://sensordatalogger.ir/api/user/login/",
       dataType: 'json',
       data: {"username": username.value , "password" : password.value },
       success: function (){
-        location.href = "http://194.5.176.138:8000/"
+        location.href = "http://sensordatalogger.ir/"
       },
       error:function(){
         wrong.style.display='flex';

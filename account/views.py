@@ -13,9 +13,7 @@ class UserLogicViewSet(GenericViewSet):
 
     @action(detail=False, methods=["post"], permission_classes=[AllowAny],serializer_class=LoginUserSerializer)
     def login(self, request):
-        print("wwww")
         if request.user.is_authenticated:
-            print("s")
             _logout(request)
 
         serializer = LoginUserSerializer(data=request.data)

@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1", "http://194.5.176.138"]
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1", "http://194.5.176.138" , "http://sensordatalogger.ir/"]
 
 # Application definition
 
